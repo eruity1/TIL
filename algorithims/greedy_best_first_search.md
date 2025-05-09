@@ -1,8 +1,8 @@
-# Gready Best-First Search
+# Greedy Best-First Search
 
-Gready Best-First Search (GBFS) is a graph traversal algorithim that prioritizes exploring nodes that appear to be "closer" to the goal based on a heuristic function `h(n)`.  It will always choose the node wiith the lowest heuristic value, hoping it will lead to the goal in the shortest possible way.
+Greedy Best-First Search (GBFS) is a graph traversal algorithim that prioritizes exploring nodes that appear to be "closer" to the goal based on a heuristic function `h(n)`.  It will always choose the node wiith the lowest heuristic value, hoping it will lead to the goal in the shortest possible way.
 
-## How Gready Best-First Search Works
+## How Greedy Best-First Search Works
 
 1. Start with the initial node
     - Add the start node to a priority queue, where the priority is determined bt the heuristic value with how close the node is to the goal.
@@ -25,14 +25,14 @@ Gready Best-First Search (GBFS) is a graph traversal algorithim that prioritizes
 - Greedy Nature
     - It does not consider the cost of the path, it only focuses on the estimated cost to the goal
 
-## Example of Gready Best-First Search
+## Example of Greedy Best-First Search
 
 Imagine a graph where nodes represent cities, and the goal is to go from City A to City G.
 1. Start at A
 2. Look at A's neighbors and choose the neighboor with the smallest heuristic value.
 3. Repeat this process, always choosing the closest node based on the heuristic, untiil reaching G
 
-## When to use Gready Best-First Search
+## When to use Greedy Best-First Search
 
 1. When speed is important
     - GBFS is typically faster than other algorithims since it doesn't calculate cumulative path costs. It only focuses on the heuristic.
