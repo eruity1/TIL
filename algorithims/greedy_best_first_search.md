@@ -64,3 +64,66 @@ greedy_best_first_search(graph, start, goal, heuristic):
     
     no path found
 ```
+
+## Greedy Best-First Search in Python
+```python
+import heapq
+
+# Example graph represented as an adjacency list
+# Each node connects to a list of tuples (neighbor, weight)
+graph = {
+    'A': [('B', 1), ('C', 3)],
+    'B': [('D', 4), ('E', 2)],
+    'C': [('F', 5)],
+    'D': [],
+    'E': [('G', 1)],
+    'F': [('G', 2)],
+    'G': []
+}
+
+# Example heuristic values for each node
+heuristic = {
+    'A': 6,
+    'B': 4,
+    'C': 5,
+    'D': 7,
+    'E': 2,
+    'F': 3,
+    'G': 0
+}
+
+def greedy_best_first_search(graph, start, goal, heuristic):
+    priority_queue = [] # Queue to store nodes
+    heapq.heappush(priority_queue, (heuristic[start], start))
+
+    visited = set() # Set to track visited nodes
+
+    while priority_queue:
+        # Get the node with the lowest heurisitc value
+        _, current = heapq.heappop(priority_queue)
+
+        # Gaol is reached
+        if current == goal:
+            print(f"Goal '{goal}' found!")
+            return True
+        
+        # Mark node as visited
+        if current not in visited:
+            print(f"Visiting '{curreent}'")
+            visited.add(current)
+
+            # Add neighbors to the queue
+            for neighbor, _ in graph[current]:
+                if neighbor not in visited:
+                    heapq.heappush(priority_queue, (heuristic[neighbor], neighbor))
+
+    print("Goal not found.")
+    return False
+
+# Run the algorithm
+start_node = 'A'
+goal_node = 'G'
+
+print("Greedy Best-First Search:")
+greedy_best_first_search(graph, start_node, goal_node)     
+```
