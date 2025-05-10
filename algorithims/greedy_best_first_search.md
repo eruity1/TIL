@@ -127,3 +127,131 @@ goal_node = 'G'
 print("Greedy Best-First Search:")
 greedy_best_first_search(graph, start_node, goal_node)     
 ```
+
+Output:
+```bash
+start_node = 'A'
+goal_node = 'G'
+
+puts "Greedy Best-First Search:"
+greedy_best_first_search(graph, start_node, goal_node)
+
+Greedy Best-First Search:
+Visiting: A
+Visiting: B
+Visiting: E
+Goal 'G' found!
+```
+
+## Greedy Best-First Search in Ruby
+```ruby
+require 'set'
+
+graph = {
+  'A' => [['B', 1], ['C', 3]],
+  'B' => [['D', 4], ['E', 2]],
+  'C' => [['F', 5]],
+  'D' => [],
+  'E' => [['G', 1]],
+  'F' => [['G', 2]],
+  'G' => []
+}
+
+# Example heuristic values for each node
+heuristic = {
+  'A' => 6,
+  'B' => 4,
+  'C' => 5,
+  'D' => 7,
+  'E' => 2,
+  'F' => 3,
+  'G' => 0
+}
+
+def greedy_best_first_search(graph, start, goal, heuristic)
+    priority_queue = [] # Priority queue to store nodes with their heuristic values
+    priority_queue << [heuristic[start], start]
+    visited = Set.new
+
+    while !priority_queue.empty?
+        # Sort the queue by heuristic value and pop the best node (lowest)
+        priority_queue.sort_by! { |priority, _| priority }
+        _, current_node = priority_queue.shift
+
+        if current_node == goal
+            puts "Goal '#{goal}' found!"
+            return true
+        end
+
+        next if visited.include?(current_node)
+
+        visited.add(current_node)
+        puts "Visiting: #{current_node}"
+
+        graph[current_node].each do |neighbor, _|
+            unless visited.include?(neighbor)
+                priority_queue << [heuristic[neighbor], neighbor]
+            end
+        end
+    end
+
+    puts "Goal not found."
+    return false
+end
+```
+
+
+## Greedy First-Search in Javascript
+```javascript
+const graph = {
+  A: [{ node: 'B', weight: 1 }, { node: 'C', weight: 3 }],
+  B: [{ node: 'D', weight: 4 }, { node: 'E', weight: 2 }],
+  C: [{ node: 'F', weight: 5 }],
+  D: [],
+  E: [{ node: 'G', weight: 1 }],
+  F: [{ node: 'G', weight: 2 }],
+  G: []
+};
+
+const heuristic = {
+  A: 6,
+  B: 4,
+  C: 5,
+  D: 7,
+  E: 2,
+  F: 3,
+  G: 0
+};
+
+function greedyBestFirstSearch(graph, start, goal, heuristic) {
+  const priorityQueue = [];
+  priorityQueue.push({ node: start, priority: heuristic[start] });
+
+  const visited = new Set();
+
+  while (priorityQueue.length > 0) {
+    priorityQueue.sort((a, b) => a.priority - b.priority);
+
+    const current = priorityQueue.shift().node;
+
+    if (current === goal) {
+      console.log(`Goal '${goal}' found!`);
+      return true;
+    }
+
+    if (visited.has(current)) continue;
+
+    console.log(`Visiting: ${current}`);
+    visited.add(current);
+
+    for (const neighbor of graph[current]) {
+      if (!visited.has(neighbor.node)) {
+        priorityQueue.push({ node: neighbor.node, priority: heuristic[neighbor.node] });
+      }
+    }
+  }
+
+  console.log("Goal not found.");
+  return false;
+}
+```
