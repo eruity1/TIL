@@ -71,26 +71,26 @@ def a_star(graph, start, goal, heuristic):
     Set fScore[start] = heuristic(start, goal)
     Create a dictionary called cameFrom to track the shortest path
 
-    While openSet is not empty:
-        current = node in openSet with the lowest fScore value
+    While the priority queue is not empty:
+        current = node in priority queue with the lowest fScore value
 
         If current == goal:
-            Return reconstruct_path(cameFrom, current)
+            return reconstruct_path(cameFrom, current)
 
-        Remove current from openSet
-        Add current to closedSet
+        Remove current from priority queue
+        Add current to visited
 
         For each neighbor of current in graph:
-            If neighbor is in closedSet:
+            If neighbor is in visited:
                 continue
 
             tentative_gScore = gScore[current] + cost(current, neighbor)
 
-            If neighbor is not in openSet:
-                Add neighbor to openSet
+            If neighbor is not in priority queue:
+                Add neighbor to priority queue
 
             If tentative_gScore >= gScore[neighbor]:
-                continue since this is not the betteer path
+                continue since this is not the better path
 
             # This path is the best until now
             cameFrom[neighbor] = current
