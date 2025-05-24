@@ -28,7 +28,7 @@ A depth-limited minimax algorithm is a variant where the recursion is stopped af
 
 ## Pseudocode
 ```bash
-def minimax(node, depth, maximizingPlayer):
+def minimax(node, depth, maximizingPlayer, evaluate):
     if depth == 0 or node is a terminal node:
         return evaluate(node)
 
